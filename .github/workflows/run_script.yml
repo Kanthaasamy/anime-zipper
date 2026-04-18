@@ -1,0 +1,29 @@
+name: Run Anime Zipper
+
+on:
+  workflow_dispatch: # This is what creates the "Run" button
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install cloudscraper
+
+      - name: Run script
+        run: python main.py
+
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: JJK_ZIP_FILE
+          path: JJK_S2_Full_Collection.zip
+          
